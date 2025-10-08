@@ -45,42 +45,47 @@
 </body>
 
 <style>
-    * {
-        box-sizing: border-box;
+    html, body {
         margin: 0;
         padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden; /* Impede que barras de rolagem apareçam */
+        font-family: Arial, sans-serif;
     }
 
+    /* ALTERAÇÃO: Removemos o display flex, pois não queremos mais centralizar o item */
     body {
-        font-family: Arial, sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
         background-color: #f0f0f0;
     }
 
+    /* ALTERAÇÃO: O container agora ocupa 100% da tela */
     .carrossel-container {
         position: relative;
-        width: 100%;
+        width: 100vw;   /* 100% da largura da tela (viewport width) */
+        height: 100vh;  /* 100% da altura da tela (viewport height) */
         overflow: hidden;
-        border-radius: 15px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        /* Removemos o box-shadow e o border-radius para o efeito de tela cheia */
     }
 
     .carrossel {
         display: flex;
         transition: transform 0.5s ease-in-out;
+        height: 100%; /* Garante que o trilho do carrossel ocupe toda a altura */
     }
 
     .slide {
         min-width: 100%;
         position: relative;
+        height: 100%;
     }
 
+    /* ALTERAÇÃO PRINCIPAL: Faz a imagem cobrir a tela sem distorcer */
     .slide img {
         width: 100%;
+        height: 100%;
         display: block;
+        object-fit: cover; /* ESSENCIAL: Faz a imagem cobrir todo o espaço, mantendo a proporção e cortando o excesso */
     }
 
     .descricao {
@@ -131,6 +136,7 @@
         position: absolute;
         bottom: 80px;
         width: 100%;
+        z-index: 10; /* Garante que os indicadores fiquem sobre a descrição */
     }
 
     .indicador {
